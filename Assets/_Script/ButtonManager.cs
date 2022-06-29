@@ -15,4 +15,8 @@ public class ButtonManager : MonoBehaviour
     {
         SulmeongPanel.SetActive(true);
     }
+    public void PanelExit()
+    {
+        SulmeongPanel.SetActive(false);
+    }
 }
