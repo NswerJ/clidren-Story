@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class ButtonManager : MonoBehaviour
 {
     [SerializeField]
-    public GameObject SulmeongPanel;
+    private GameObject SulmeongPanel;
     public void StartButton()
     {
         SceneManager.LoadScene("Stage");
