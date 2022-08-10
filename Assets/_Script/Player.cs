@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
     public float maxSpeed;
     public float jumpPower;
 
+    
+
+   
+
+   
     Rigidbody2D rigid;
     SpriteRenderer spriterenderer;
     Animator anim;
@@ -18,6 +23,9 @@ public class Player : MonoBehaviour
     }
     public void Update()
     {
+       
+        
+        
         //มกวม
         if (Input.GetButtonDown("Jump") && !anim.GetBool("Jump"))
         {
