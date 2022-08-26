@@ -1,20 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     public float maxSpeed;
     public float jumpPower;
 
-    
+    public AudioClip clip;
 
-   
+    public int Heart = 3;
+    public GameObject Heart1;
+    public GameObject Heart2;
+    public GameObject Heart3;
 
-   
+
     Rigidbody2D rigid;
     SpriteRenderer spriterenderer;
     Animator anim;
+    public GameObject player;
+    public Transform[] playerSpawnPoints;
+
+                
+
+
+    void RandomSelectSpawnPoint()
+    {
+        int number = Random.Range(0, playerSpawnPoints.Length);
+        player.transform.position = playerSpawnPoints[number].transform.position;
+    }
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -23,18 +38,27 @@ public class Player : MonoBehaviour
     }
     public void Update()
     {
-       
-        
-        
+
+        if (Heart == 2)
+        {
+            Heart3.SetActive(false);
+        }
+        if (Heart == 1)
+        {
+            Heart2.SetActive(false);
+        }
+
+        if (Heart == 0)
+        {
+            SceneManager.LoadScene("GameOver");
+            Heart1.SetActive(false);
+        }
         //มกวม
         if (Input.GetButtonDown("Jump") && !anim.GetBool("Jump"))
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("Jump", true);
-        }
-        else
-        {
-
+            SoundManager.instance.SFXPlay("Jump", clip);
         }
         if (Input.GetButtonUp("Horizontal"))
         {
@@ -75,7 +99,7 @@ public class Player : MonoBehaviour
 
             if (rayHit.collider != null)
             {
-                if (rayHit.distance < 0.8f)
+                if (rayHit.distance < 0.9f)
                 {
                     anim.SetBool("Jump", false);
                 }
@@ -84,4 +108,39 @@ public class Player : MonoBehaviour
         }
         
     }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("out"))
+        {
+            Heart--;
+            RandomSelectSpawnPoint();
+        }
+        if (collision.CompareTag("Spike"))
+        {
+            Heart--;
+            RandomSelectSpawnPoint();
+        }
+        if (collision.CompareTag("clear"))
+        {
+            SceneManager.LoadScene("stage 2");
+        }
+        if (collision.CompareTag("clear2"))
+        {
+            SceneManager.LoadScene("stage 3");
+        }
+        if (collision.CompareTag("clear3"))
+        {
+            SceneManager.LoadScene("Clear");
+        }
+        if (collision.CompareTag("monster"))
+        {
+            Heart --;
+            RandomSelectSpawnPoint();
+        }
+        if (collision.CompareTag("loser"))
+        {
+            SceneManager.LoadScene("Stage");
+        }
+    }
+    
 }

@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - rand
+  - out
+  - clear
+  - Spike
+  - clear2
+  - clear3
+  - monster
+  - loser
   layers:
   - Default
   - TransparentFX
