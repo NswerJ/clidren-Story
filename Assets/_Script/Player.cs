@@ -123,10 +123,30 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("clear"))
         {
             SceneManager.LoadScene("stage 2");
+            if(Heart == 2)
+            {
+                Heart++;
+                Heart3.SetActive(true);
+            }
+            if (Heart == 1)
+            {
+                Heart++;
+                Heart2.SetActive(true);
+            }
         }
         if (collision.CompareTag("clear2"))
         {
             SceneManager.LoadScene("stage 3");
+            if (Heart == 2)
+            {
+                Heart++;
+                Heart3.SetActive(true);
+            }
+            if (Heart == 1)
+            {
+                Heart++;
+                Heart2.SetActive(true);
+            }
         }
         if (collision.CompareTag("clear3"))
         {

@@ -19,4 +19,12 @@ public class ButtonManager : MonoBehaviour
     {
         SulmeongPanel.SetActive(false);
     }
+    public void menu()
+    {
+        SceneManager.LoadScene("StartScence");
+    }
+    public void restart()
+    {
+        SceneManager.LoadScene("stage");
+    }
 }
